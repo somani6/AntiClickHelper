@@ -1,7 +1,7 @@
 ## Interface: 120000
 ## Title: AntiClickHelper
 ## Notes: Warns you when you click abilities instead of using keybinds.
-## Author: Gemini Code Assist
+## Author: Somani
 ## Version: 1.0
 ## SavedVariables: AntiClickHelperDB
 ## OptionalDeps: Ace3, LibSharedMedia-3.0
