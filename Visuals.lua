@@ -1,7 +1,7 @@
 local addonName, addon = ...
 local ACH = LibStub("AceAddon-3.0"):GetAddon(addonName)
 
--- Erstellt den schwarzen Kreis um die Maus
+-- Creates the black circle around the mouse cursor
 function ACH:CreateHardmodeFrame()
     local f = CreateFrame("Frame", "ACH_HardmodeFrame", UIParent)
     f:SetFrameStrata("TOOLTIP")
@@ -12,7 +12,7 @@ function ACH:CreateHardmodeFrame()
     t:SetVertexColor(0, 0, 0, 1)
     t:SetAllPoints(f)
     
-    -- Maske für Kreisform
+    -- Mask for circle shape
     local mask = f:CreateMaskTexture()
     mask:SetTexture("Interface\\Masks\\CircleMaskScalable")
     mask:SetAllPoints(t)
