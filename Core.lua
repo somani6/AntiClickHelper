@@ -1,6 +1,5 @@
 local addonName, addon = ...
 local ACH = LibStub("AceAddon-3.0"):NewAddon(addon, addonName, "AceConsole-3.0", "AceEvent-3.0")
-local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 local LSM = LibStub("LibSharedMedia-3.0", true)
 
 local defaults = {
@@ -24,7 +23,6 @@ local defaults = {
 
 local lastClickTime = 0
 local CLICK_THRESHOLD = 0.5 -- Time window in seconds to attribute a click
-local cursorFrame = nil
 local INITIAL_RADIUS = 50
 local RADIUS_STEP = 30
 
