@@ -15,7 +15,10 @@ if L then
     L["LibSharedMedia missing"] = true
     L["AntiClickHelper loaded. /ach for options."] = true
     L["WARNING: You clicked!"] = "|cffff0000WARNING:|r You clicked!"
-    L["Action Bars"] = true
+    L["Punish Unbound"] = true
+    L["Punish clicks even if the button has no keybind."] = true
+    L["Blizzard Action Bars"] = true
+    L["Dominos"] = true
     L["Select which action bars to monitor."] = true
     L["Action Bar 1"] = true
     L["Action Bar 2"] = true
@@ -25,6 +28,12 @@ if L then
     L["Action Bar 6"] = true
     L["Action Bar 7"] = true
     L["Action Bar 8"] = true
+    L["Action Bar 9"] = true
+    L["Action Bar 10"] = true
+    L["Action Bar 11"] = true
+    L["Action Bar 12"] = true
+    L["Action Bar 13"] = true
+    L["Action Bar 14"] = true
 end
 
 local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "deDE")
@@ -41,7 +50,10 @@ if L then
     L["LibSharedMedia missing"] = "LibSharedMedia fehlt"
     L["AntiClickHelper loaded. /ach for options."] = "AntiClickHelper geladen. /ach für Optionen."
     L["WARNING: You clicked!"] = "|cffff0000WARNUNG:|r Du hast geklickt!"
-    L["Action Bars"] = "Aktionsleisten"
+    L["Punish Unbound"] = "Ungebundene bestrafen"
+    L["Punish clicks even if the button has no keybind."] = "Bestraft Klicks auch dann, wenn der Button keinen Keybind hat."
+    L["Blizzard Action Bars"] = "Blizzard Aktionsleisten"
+    L["Dominos"] = "Dominos"
     L["Select which action bars to monitor."] = "Wähle aus, welche Aktionsleisten überwacht werden sollen."
     L["Action Bar 1"] = "Aktionsleiste 1"
     L["Action Bar 2"] = "Aktionsleiste 2"
@@ -51,6 +63,12 @@ if L then
     L["Action Bar 6"] = "Aktionsleiste 6"
     L["Action Bar 7"] = "Aktionsleiste 7"
     L["Action Bar 8"] = "Aktionsleiste 8"
+    L["Action Bar 9"] = "Aktionsleiste 9"
+    L["Action Bar 10"] = "Aktionsleiste 10"
+    L["Action Bar 11"] = "Aktionsleiste 11"
+    L["Action Bar 12"] = "Aktionsleiste 12"
+    L["Action Bar 13"] = "Aktionsleiste 13"
+    L["Action Bar 14"] = "Aktionsleiste 14"
 end
 
 local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "frFR")

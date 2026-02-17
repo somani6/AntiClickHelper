@@ -41,6 +41,7 @@
         "RESET_TO_DEFAULT",
         "MinimalSliderWithSteppersMixin",
         "CreateMinimalSliderFormatter",
-        "HUD_EDIT_MODE_RESET_POSITION"
+        "HUD_EDIT_MODE_RESET_POSITION",
+        "RANGE_INDICATOR"
     ]
 }

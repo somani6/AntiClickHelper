@@ -4,7 +4,7 @@
 ## Author: Somani
 ## Version: 1.0
 ## SavedVariables: AntiClickHelperDB
-## OptionalDeps: Ace3, LibSharedMedia-3.0
+## OptionalDeps: Ace3, LibSharedMedia-3.0, SharedMedia, WeakAuras_SharedMedia
 
 # Embeds
 Libs\LibStub\LibStub.lua
@@ -21,4 +21,6 @@ Libs\LibSharedMedia-3.0\lib.xml
 Locale.lua
 Core.lua
 Visuals.lua
+Blizzard.lua
+Dominos.lua
 Options.lua

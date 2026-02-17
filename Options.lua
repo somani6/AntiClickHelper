@@ -23,6 +23,14 @@ function ACH:GetOptions()
                         set = function(info, val) ACH.db.profile.active = val end,
                         order = 1,
                     },
+                    punishUnbound = {
+                        type = 'toggle',
+                        name = L["Punish Unbound"],
+                        desc = L["Punish clicks even if the button has no keybind."],
+                        get = function(info) return ACH.db.profile.punishUnbound end,
+                        set = function(info, val) ACH.db.profile.punishUnbound = val end,
+                        order = 2,
+                    },
                 },
             },
             hardmodeSettings = {
@@ -77,7 +85,7 @@ function ACH:GetOptions()
             },
             barSettings = {
                 type = 'group',
-                name = L["Action Bars"],
+                name = L["Blizzard Action Bars"],
                 order = 4,
                 args = {
                     desc = {
@@ -143,8 +151,33 @@ function ACH:GetOptions()
                     },
                 },
             },
+            dominosSettings = {
+                type = 'group',
+                name = L["Dominos"],
+                order = 5,
+                hidden = function() return not C_AddOns.IsAddOnLoaded("Dominos") end,
+                args = {
+                    desc = {
+                        type = 'description',
+                        name = L["Select which action bars to monitor."],
+                        order = 0,
+                    },
+                },
+            },
         },
     }
+
+    -- Generiere Optionen für Dominos Leisten 1-14
+    for i = 1, 14 do
+        options.args.dominosSettings.args["bar" .. i] = {
+            type = 'toggle',
+            name = L["Action Bar " .. i],
+            get = function(info) return ACH.db.profile.enabledBars["DominosBar" .. i] end,
+            set = function(info, val) ACH.db.profile.enabledBars["DominosBar" .. i] = val end,
+            order = i,
+        }
+    end
+
     return options
 end
 
