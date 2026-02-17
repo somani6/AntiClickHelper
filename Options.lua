@@ -3,6 +3,18 @@ local ACH = LibStub("AceAddon-3.0"):GetAddon(addonName)
 local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 local LSM = LibStub("LibSharedMedia-3.0", true)
 
+local function AddBarOptions(args, prefix, count)
+    for i = 1, count do
+        args["bar" .. i] = {
+            type = 'toggle',
+            name = L["Action Bar " .. i],
+            get = function(info) return ACH.db.profile.enabledBars[prefix .. i] end,
+            set = function(info, val) ACH.db.profile.enabledBars[prefix .. i] = val end,
+            order = i,
+        }
+    end
+end
+
 function ACH:GetOptions()
     local options = {
         name = "AntiClickHelper",
@@ -78,7 +90,7 @@ function ACH:GetOptions()
                             if sound then
                                 PlaySoundFile(sound, "Master") 
                             end
-                        end, -- Play preview
+                        end,
                         order = 1,
                     },
                 },
@@ -155,7 +167,30 @@ function ACH:GetOptions()
                 type = 'group',
                 name = L["Dominos"],
                 order = 5,
-                hidden = function() return not C_AddOns.IsAddOnLoaded("Dominos") end,
+                args = {
+                    desc = {
+                        type = 'description',
+                        name = L["Select which action bars to monitor."],
+                        order = 0,
+                    },
+                },
+            },
+            bartenderSettings = {
+                type = 'group',
+                name = L["Bartender4"],
+                order = 6,
+                args = {
+                    desc = {
+                        type = 'description',
+                        name = L["Select which action bars to monitor."],
+                        order = 0,
+                    },
+                },
+            },
+            elvuiSettings = {
+                type = 'group',
+                name = L["ElvUI"],
+                order = 7,
                 args = {
                     desc = {
                         type = 'description',
@@ -167,32 +202,26 @@ function ACH:GetOptions()
         },
     }
 
-    -- Generiere Optionen für Dominos Leisten 1-14
-    for i = 1, 14 do
-        options.args.dominosSettings.args["bar" .. i] = {
-            type = 'toggle',
-            name = L["Action Bar " .. i],
-            get = function(info) return ACH.db.profile.enabledBars["DominosBar" .. i] end,
-            set = function(info, val) ACH.db.profile.enabledBars["DominosBar" .. i] = val end,
-            order = i,
-        }
-    end
+    AddBarOptions(options.args.dominosSettings.args, "DominosBar", 14)
+    AddBarOptions(options.args.bartenderSettings.args, "BartenderBar", 10)
+    AddBarOptions(options.args.elvuiSettings.args, "ElvUIBar", 15)
 
     return options
 end
 
 function ACH:OpenConfig()
-    -- Opens the Blizzard options menu directly in the addon's category
+    if InCombatLockdown() then
+        self:Print(L["Cannot open configuration while in combat."])
+        return
+    end
+
     if Settings and Settings.OpenToCategory then
-        -- Try to open the category (works in 10.0+)
         if self.optionsFrame.category then
              Settings.OpenToCategory(self.optionsFrame.category:GetID())
         else
-             -- Fallback
              Settings.OpenToCategory(self.optionsFrame.name)
         end
     else
-        -- Fallback for older versions
         InterfaceOptionsFrame_OpenToCategory(self.optionsFrame)
     end
 end

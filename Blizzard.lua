@@ -1,7 +1,6 @@
 local addonName, addon = ...
 local ACH = LibStub("AceAddon-3.0"):GetAddon(addonName)
 
--- List of Action Bar names (Modern WoW Standard)
 local actionBars = {
     "ActionButton",
     "MultiBarBottomLeftButton",
@@ -18,16 +17,14 @@ local actionBars = {
     "MultiBarLeftActionButton",
 }
 
--- Ermittelt Binding-Command und Config-Key anhand der Action ID
 function ACH:GetBlizzardBindingInfo(button)
     local id = ACH:GetActionID(button)
     if not id then return nil, nil end
 
-    -- Mapping basierend auf Standard WoW Action IDs
     if id >= 1 and id <= 12 then
         return "ACTIONBUTTON" .. id, "ActionButton"
     elseif id >= 13 and id <= 24 then
-        -- Seite 2 (meist keine eigene Leiste, wird über Paging erreicht)
+        -- Page 2 (usually no own bar, reached via paging)
         return "ACTIONBUTTON" .. (id - 12), "ActionButton" 
     elseif id >= 25 and id <= 36 then
         return "MULTIACTIONBAR3BUTTON" .. (id - 24), "MultiBarRightButton"
@@ -47,9 +44,9 @@ function ACH:GetBlizzardBindingInfo(button)
 end
 
 function ACH:GetBlizzardConfig(button)
-    local command, configKey = self:GetBlizzardBindingInfo(button)
-    if not configKey then return nil, nil end
-    return self.db.profile.enabledBars[configKey], command
+    local _, configKey = self:GetBlizzardBindingInfo(button)
+    if not configKey then return nil end
+    return self.db.profile.enabledBars[configKey]
 end
 
 function ACH:ScanBlizzardButtons(callback)

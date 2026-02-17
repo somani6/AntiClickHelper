@@ -19,6 +19,8 @@ if L then
     L["Punish clicks even if the button has no keybind."] = true
     L["Blizzard Action Bars"] = true
     L["Dominos"] = true
+    L["Bartender4"] = true
+    L["ElvUI"] = true
     L["Select which action bars to monitor."] = true
     L["Action Bar 1"] = true
     L["Action Bar 2"] = true
@@ -34,6 +36,8 @@ if L then
     L["Action Bar 12"] = true
     L["Action Bar 13"] = true
     L["Action Bar 14"] = true
+    L["Action Bar 15"] = true
+    L["Cannot open configuration while in combat."] = true
 end
 
 local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "deDE")
@@ -54,6 +58,8 @@ if L then
     L["Punish clicks even if the button has no keybind."] = "Bestraft Klicks auch dann, wenn der Button keinen Keybind hat."
     L["Blizzard Action Bars"] = "Blizzard Aktionsleisten"
     L["Dominos"] = "Dominos"
+    L["Bartender4"] = "Bartender4"
+    L["ElvUI"] = "ElvUI"
     L["Select which action bars to monitor."] = "Wähle aus, welche Aktionsleisten überwacht werden sollen."
     L["Action Bar 1"] = "Aktionsleiste 1"
     L["Action Bar 2"] = "Aktionsleiste 2"
@@ -69,6 +75,8 @@ if L then
     L["Action Bar 12"] = "Aktionsleiste 12"
     L["Action Bar 13"] = "Aktionsleiste 13"
     L["Action Bar 14"] = "Aktionsleiste 14"
+    L["Action Bar 15"] = "Aktionsleiste 15"
+    L["Cannot open configuration while in combat."] = "Konfiguration kann nicht im Kampf geöffnet werden."
 end
 
 local L = LibStub("AceLocale-3.0"):NewLocale(addonName, "frFR")
