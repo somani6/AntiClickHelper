@@ -73,6 +73,7 @@ function ACH:OnInitialize()
 
     self.db = LibStub("AceDB-3.0"):New("AntiClickHelperDB", defaults, true)
     self.db.profile.radius = 0
+    self.processedCasts = {}
     
     LibStub("AceConfig-3.0"):RegisterOptionsTable("AntiClickHelper", self:GetOptions())
     self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions("AntiClickHelper", "AntiClickHelper")
@@ -81,6 +82,7 @@ function ACH:OnInitialize()
     
     self:CreateHardmodeFrame()
     self:ScanActionBars()
+    self:RegisterEvent("UNIT_SPELLCAST_START")
     self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED")
     self:RegisterEvent("PLAYER_REGEN_DISABLED")
     self:RegisterEvent("PLAYER_REGEN_ENABLED")
@@ -199,16 +201,8 @@ function ACH:ScanActionBars()
     end
 end
 
-function ACH:UNIT_SPELLCAST_SUCCEEDED(event, unit, castGUID, spellID)
-    if unit ~= "player" then return end
-    if not self.db.profile.active then return end
-    if not UnitAffectingCombat("player") then return end
-
-    local now = GetTime()
-    local timeDiff = now - lastClickTime
-
-    -- If last click was long ago, it was a keybind
-    if timeDiff >= CLICK_THRESHOLD and self.db.profile.hardmode and self.db.profile.radius > 0 then
+function ACH:ShrinkCircle()
+    if self.db.profile.hardmode and self.db.profile.radius > 0 then
         self.db.profile.radius = self.db.profile.radius - RADIUS_STEP
         if self.db.profile.radius < INITIAL_RADIUS then
             self.db.profile.radius = 0
@@ -217,11 +211,41 @@ function ACH:UNIT_SPELLCAST_SUCCEEDED(event, unit, castGUID, spellID)
     end
 end
 
+function ACH:UNIT_SPELLCAST_START(event, unit, castGUID, spellID)
+    if unit ~= "player" then return end
+    self.processedCasts[castGUID] = true
+
+    if not self.db.profile.active or not UnitAffectingCombat("player") then return end
+
+    local now = GetTime()
+    if (now - lastClickTime) >= CLICK_THRESHOLD then
+        self:ShrinkCircle()
+    end
+end
+
+function ACH:UNIT_SPELLCAST_SUCCEEDED(event, unit, castGUID, spellID)
+    if unit ~= "player" then return end
+    
+    -- Wenn der Zauber bereits bei START verarbeitet wurde (Castzeit), hier ignorieren
+    if self.processedCasts[castGUID] then
+        self.processedCasts[castGUID] = nil
+        return
+    end
+
+    if not self.db.profile.active or not UnitAffectingCombat("player") then return end
+
+    local now = GetTime()
+    if (now - lastClickTime) >= CLICK_THRESHOLD then
+        self:ShrinkCircle()
+    end
+end
+
 function ACH:PLAYER_REGEN_DISABLED()
 end
 
 function ACH:PLAYER_REGEN_ENABLED()
     self.db.profile.radius = 0
+    self.processedCasts = {}
     self:UpdateCursorFrame()
 end
 

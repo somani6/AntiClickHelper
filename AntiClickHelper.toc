@@ -5,6 +5,7 @@
 ## Version: 1.1
 ## SavedVariables: AntiClickHelperDB
 ## OptionalDeps: Ace3, LibSharedMedia-3.0, WeakAuras_SharedMedia
+## X-Curse-Project-ID: 1463965
 
 # Embeds
 Libs\LibStub\LibStub.lua
